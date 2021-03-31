@@ -1,0 +1,116 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User API Ignite Documentation",
+    "description": "This is an user API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "viniciussaturnino78@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Vinicius de Sousa Saturnino",
+                  "email": "viniciussaturnino78@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "List all users",
+        "description": "List all users if param id is valid",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Specific user"
+          },
+          "400": {
+            "description": "User not found or user isn't a admin"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "List user by id",
+        "description": "List user by your id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Turn user as admin",
+        "description": "Turn user as admin",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  }
+}
